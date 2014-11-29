@@ -15,11 +15,11 @@
 namespace tinyCompiler
 {
 	enum class TokenType{
-		INTERGER,		//only have interger
-		KEYWORD,		//such as if
-		OPERATOR,		//such as + - * /
-		DELIMITER,		//such as ;
-		END_OF_FILE		//end of file
+		INTERGER,		// only have interger T_T
+		KEYWORD,		// such as if
+		OPERATOR,		// such as + - * /
+		DELIMITER,		// such as ;
+		END_OF_FILE		// end of file
 	};
 
 	enum class TokenValue{
@@ -45,7 +45,7 @@ namespace tinyCompiler
 
 		// comparation symbols
 		EQUAL,			// =
-        LESS_THEN,       // <
+        LESS_THEN,      // <
 
 		UNRESERVED
 	};

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 lms. All rights reserved.
 //
 
-#include "Dictionary.h"
+#include "dictionary.h"
 
 namespace tinyCompiler
 {
