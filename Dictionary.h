@@ -9,6 +9,8 @@
 #ifndef __TinyCompiler__Dictionary__
 #define __TinyCompiler__Dictionary__
 
+#include <string>
+#include <unordered_map>
 #include "token.h"
 
 namespace tinyCompiler
@@ -16,6 +18,11 @@ namespace tinyCompiler
     class Dictionary{
     public:
         Dictionary();
+    private:
+        void addToken(std::string name, std::pair<TokenType, TokenValue> tokenMeta);
+
+    private:
+        std::unordered_map<std::string, std::pair<TokenType, TokenValue>> dictionary_;
     };
 }
 

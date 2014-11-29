@@ -10,6 +10,7 @@
 #define __TinyCompiler__token__
 
 #include <iostream>
+#include <utility>
 
 namespace tinyCompiler
 {
@@ -40,13 +41,16 @@ namespace tinyCompiler
 		MULTIPLY,		// *
 		DIVIDE,			// /
 		ASSIGN,			// :=
+		SEMICOLON,		// ;
 
 		// comparation symbols
 		EQUAL,			// =
+        LESS_THEN,       // <
 
 		UNRESERVED
 	};
 
+    //TokenLocation
 	class TokenLocation{
 	public:
 		TokenLocation();
@@ -54,12 +58,15 @@ namespace tinyCompiler
 
 	private:
 		int line_;
-		int column_;
+		int colum_;
 	};
 
+    //Token
 	class Token{
 	public:
 		Token();
+		Token(TokenType type, TokenValue value,const TokenLocation &location,
+              std::string name);
 
 		TokenType getTokenType() const;
 		TokenValue getTokenValue() const;

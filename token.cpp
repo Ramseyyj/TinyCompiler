@@ -13,4 +13,7 @@ namespace tinyCompiler
     TokenLocation::TokenLocation(int line, int column)
         :line_(line),column_(column){}
     
+    Token::Token(TokenType type, TokenValue value, const TokenLocation &location,
+                 std::string name)
+        :type_(type),value_(value),location_(location),name_(name){}
 }
