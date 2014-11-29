@@ -1,5 +1,5 @@
 //
-//  Dictionary.h
+//  dictionary.h
 //  TinyCompiler
 //
 //  Created by lms on 11/28/14.
@@ -19,7 +19,7 @@ namespace tinyCompiler
     public:
         Dictionary();
     private:
-        void addToken(std::string name, std::pair<TokenType, TokenValue> tokenMeta);
+        void addToken(const std::string name, std::pair<TokenType, TokenValue> tokenMeta);
 
     private:
         std::unordered_map<std::string, std::pair<TokenType, TokenValue>> dictionary_;

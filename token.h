@@ -54,11 +54,12 @@ namespace tinyCompiler
 	class TokenLocation{
 	public:
 		TokenLocation();
-		TokenLocation(int line, int column);
+        TokenLocation(const std::string &fileName, long line, long column);
 
 	private:
-		int line_;
-		int colum_;
+		long        line_;
+		long        column_;
+        std::string fileName_;
 	};
 
     //Token
@@ -67,6 +68,8 @@ namespace tinyCompiler
 		Token();
 		Token(TokenType type, TokenValue value,const TokenLocation &location,
               std::string name);
+        Token(TokenType type, TokenValue value, const TokenLocation &location,
+              long intValue, std::string name);
 
 		TokenType getTokenType() const;
 		TokenValue getTokenValue() const;
@@ -79,6 +82,9 @@ namespace tinyCompiler
         TokenValue      value_;
         TokenLocation   location_;
         std::string     name_;
+        
+        long            intValue_;
+        std::string     strValue_;
 	};
     
     inline TokenType Token::getTokenType() const{
