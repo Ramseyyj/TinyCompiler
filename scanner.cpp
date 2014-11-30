@@ -50,7 +50,9 @@ namespace tinyCompiler {
     
     //something need to do here
     
-    
+    void Scanner::handleLineComment(){
+        Scanner
+    }
     
     
     
