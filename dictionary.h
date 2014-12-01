@@ -18,6 +18,8 @@ namespace tinyCompiler
     class Dictionary{
     public:
         Dictionary();
+        std::pair<TokenType, TokenValue> lookup(const std::string &name) const;
+        bool haveToken(const std::string &name) const;
     private:
         void addToken(const std::string name, std::pair<TokenType, TokenValue> tokenMeta);
 

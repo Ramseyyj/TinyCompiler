@@ -7,13 +7,14 @@
 //
 
 #include "scanner.h"
+#include "error.h"
 
 namespace tinyCompiler {
     Scanner::Scanner(const std::string &fileName):fileName_(fileName),line_(1),column_(0),currentChar_(0),state_(State::NONE){
         input_.open(fileName_);
         
         if(input_.fail()){
-            std::cout<<"Open File Error!"<<std::endl;
+            errorTokenMsg("Try to open " + fileName_ + ",error!");
         }
     }
     
@@ -43,13 +44,17 @@ namespace tinyCompiler {
     
     void Scanner::makeToken(TokenType tType, TokenValue tValue, const TokenLocation &tLocation,
                    std::string name){
-        token_=Token(tType, tValue, tLocation, name);
+        token_= Token(tType, tValue, tLocation, name);
         buffer_.clear();
-        state_=State::NONE;
+        state_ = State::NONE;
     }
     
-    //something need to do here
-    
+    void Scanner::makeToken(TokenType tType, TokenValue tValue, const TokenLocation &tLocation,
+                            long intValue, std::string name){
+        token_= Token(tType, tValue, tLocation, intValue, name);
+        buffer_.clear();
+        state_ = State::NONE;
+    }
     
     void Scanner::pushProcess(){
         do{
@@ -106,6 +111,7 @@ namespace tinyCompiler {
                     break;
                     
                 default:
+                    errorTokenMsg("Match token state error!");
                     //error need to handle
                     break;
             }
@@ -134,10 +140,64 @@ namespace tinyCompiler {
         return token_;
     }
     
+    void Scanner::handleEOFState(){
+        location_ = getTokenLocation();
+        makeToken(TokenType::END_OF_FILE, TokenValue::UNRESERVED, location_, std::string("EOF_OF_FILE"));
+        input_.close();
+    }
     
+    void Scanner::handleIdentifierState(){
+        location_ = getTokenLocation();
+        
+        addToBuffer(currentChar_);
+        getNextChar();
+        
+        while (std::isalnum(currentChar_) || currentChar_ == '_') {
+            addToBuffer(currentChar_);
+            getNextChar();
+        }
+        
+        //something need to judge, is tiny case sensitive?
+        
+        auto tokenMeta = dictionary_.lookup(buffer_);
+        makeToken(tokenMeta.first, tokenMeta.second, location_, buffer_);
+    }
     
+    //we can expand number type here ,like 0x...
+    //need errorTokenMsg
+    void Scanner::handleNumberState(){
+        location_ = getTokenLocation();
+        
+        addToBuffer(currentChar_);
+        getNextChar();
+        
+        while (isdigit(currentChar_)) {
+            addToBuffer(currentChar_);
+            getNextChar();
+        }
+        
+        makeToken(TokenType::INTERGER, TokenValue::UNRESERVED, location_, std::stol(buffer_,0,10), buffer_);
+    }
     
-    
-    
-    
+    void Scanner::handleOperationState(){
+        location_ = getTokenLocation();
+        
+        bool matched = false;
+        addToBuffer(currentChar_);
+        //peek the char ,but the file pointer does not get forward
+        addToBuffer(peekChar());
+        
+        if (dictionary_.haveToken(buffer_)) {
+            matched = true;
+            getNextChar(); // match two,eat the second
+        }
+        else{
+            reduceBuffer();
+        }
+        
+        auto tokenMeta = dictionary_.lookup(buffer_);
+        makeToken(tokenMeta.first, tokenMeta.second, location_, buffer_);
+        
+        getNextChar();
+    }
 }

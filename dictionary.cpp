@@ -37,4 +37,27 @@ namespace tinyCompiler
         dictionary_.insert(std::make_pair(name,tokenMeta));
     }
     
+    std::pair<TokenType, TokenValue> Dictionary::lookup(const std::string &name) const{
+        TokenType tType = TokenType::IDENTIFIER;
+        TokenValue tValue = TokenValue::UNRESERVED;
+        
+        auto iter = dictionary_.find(name);
+        
+        if(iter != dictionary_.end()){
+            //second means the whole pair, first means the first element in the pair
+            tType = iter->second.first;
+            tValue = iter->second.second;
+        }
+        return std::make_pair(tType, tValue);
+    }
+    
+    bool Dictionary::haveToken(const std::string &name) const{
+        auto iter = dictionary_.find(name);
+        
+        if (iter!=dictionary_.end()) {
+            return true;
+        }
+        return false;
+    }
+    
 }

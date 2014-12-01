@@ -10,6 +10,7 @@
 #define __TinyCompiler__scanner__
 
 #include <fstream>
+#include "token.h"
 #include "dictionary.h"
 
 namespace tinyCompiler {
@@ -29,18 +30,16 @@ namespace tinyCompiler {
         void    makeToken(TokenType tType, TokenValue tValue, const TokenLocation &tLocation,
                           long intValue, std::string name);
         
-        //handle state
+        //handle state,we don't have string state T_T
         void    handleEOFState();
         void    handleIdentifierState();
         void    handleNumberState();
-        void    handleStringState();
         void    handleOperationState();
         
         void    pushProcess();
         //handle comment
         void    handleComment();
-        
-        void    handleDigit();
+
         TokenLocation getTokenLocation() const;
         
         

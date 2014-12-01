@@ -16,6 +16,7 @@ namespace tinyCompiler
 {
 	enum class TokenType{
 		INTERGER,		// only have interger T_T
+        IDENTIFIER,     // such as ab
 		KEYWORD,		// such as if
 		OPERATOR,		// such as + - * /
 		DELIMITER,		// such as ;
@@ -50,7 +51,6 @@ namespace tinyCompiler
 		UNRESERVED
 	};
 
-    //TokenLocation
 	class TokenLocation{
 	public:
 		TokenLocation();
@@ -62,7 +62,6 @@ namespace tinyCompiler
         std::string fileName_;
 	};
 
-    //Token
 	class Token{
 	public:
 		Token();
@@ -83,8 +82,7 @@ namespace tinyCompiler
         TokenLocation   location_;
         std::string     name_;
         
-        long            intValue_;
-        std::string     strValue_;
+        long            intValue_;  //we only have int T_T
 	};
     
     inline TokenType Token::getTokenType() const{
