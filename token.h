@@ -20,7 +20,8 @@ namespace tinyCompiler
 		KEYWORD,		// such as if
 		OPERATOR,		// such as + - * /
 		DELIMITER,		// such as ;
-		END_OF_FILE		// end of file
+		END_OF_FILE,	// end of file
+        UNKNOWN
 	};
 
 	enum class TokenValue{
@@ -55,7 +56,8 @@ namespace tinyCompiler
 	public:
 		TokenLocation();
         TokenLocation(const std::string &fileName, long line, long column);
-
+        
+        std::string toString() const;
 	private:
 		long        line_;
 		long        column_;
@@ -72,10 +74,12 @@ namespace tinyCompiler
 
 		TokenType getTokenType() const;
 		TokenValue getTokenValue() const;
-
 		const TokenLocation& getTokenLocation() const;
 		std::string getTokenName() const;
-
+        
+        std::string tokenTypeDescription() const;
+        void dump(std::ostream &out = std::cout) const;
+        
 	private:
 		TokenType       type_;
         TokenValue      value_;

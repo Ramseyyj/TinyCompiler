@@ -20,4 +20,50 @@ namespace tinyCompiler
     Token::Token(TokenType type, TokenValue value, const TokenLocation &location,
                  long intValue, std::string name)
         :type_(type),value_(value),location_(location),intValue_(intValue),name_(name){}
+    
+    std::string TokenLocation::toString() const{
+        return fileName_ + std::to_string(line_) + std::to_string(column_) + ":";
+    }
+    
+    std::string Token::tokenTypeDescription() const{
+        std::string buffer;
+        
+        switch (type_) {
+            case TokenType::INTERGER:
+                buffer = "interger:     ";
+                break;
+            
+            case TokenType::IDENTIFIER:
+                buffer = "identifier:   ";
+                break;
+                
+            case TokenType::KEYWORD:
+                buffer = "keyword:      ";
+                break;
+                
+            case TokenType::OPERATOR:
+                buffer = "operator:     ";
+                break;
+            
+            case TokenType::DELIMITER:
+                buffer = "delimiter:    ";
+                break;
+                
+            case TokenType::END_OF_FILE:
+                buffer = "eof:          ";
+                break;
+            
+            case TokenType::UNKNOWN:
+                buffer = "unknown:      ";
+                break;
+                
+            default:
+                break;
+        }
+        return buffer;
+    }
+    
+    void Token::dump(std::ostream &out) const{
+        out << location_.toString() << "\t" << tokenTypeDescription() << "\t" << name_ << "\t\t"<<std::endl;
+    }
 }
