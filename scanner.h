@@ -36,9 +36,9 @@ namespace tinyCompiler {
         void    handleStringState();
         void    handleOperationState();
         
+        void    pushProcess();
         //handle comment
-        void    handleLineComment();
-        void    handleBlockComment();
+        void    handleComment();
         
         void    handleDigit();
         TokenLocation getTokenLocation() const;
@@ -51,7 +51,6 @@ namespace tinyCompiler {
             END_OF_FILE,
             IDENTIFIER,
             NUMBER,
-            STRING,
             OPERATION
         };
         
