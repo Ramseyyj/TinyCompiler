@@ -11,25 +11,20 @@
 namespace tinyCompiler
 {
     TokenLocation::TokenLocation(const std::string &fileName, long line, long column)
-        :fileName_(fileName),line_(line),column_(column)
-    {}
+        :fileName_(fileName),line_(line),column_(column){}
     
-    TokenLocation::TokenLocation():fileName_(""), line_(1), column_(0)
-    {}
+    TokenLocation::TokenLocation():fileName_(""), line_(1), column_(0){}
     
     Token::Token(TokenType type, TokenValue value, const TokenLocation &location,
                  std::string name)
-        :type_(type),value_(value),location_(location),name_(name)
-    {}
+        :type_(type),value_(value),location_(location),name_(name){}
     
     Token::Token(TokenType type, TokenValue value, const TokenLocation &location,
                  long intValue, std::string name)
-        :type_(type),value_(value),location_(location),intValue_(intValue),name_(name)
-    {}
+        :type_(type),value_(value),location_(location),intValue_(intValue),name_(name){}
     
     Token::Token() : type_(TokenType::UNKNOWN), value_(TokenValue::UNRESERVED),
-        location_(std::string(""), 0, 0), name_("")
-    {}
+        location_(std::string(""), 0, 0), name_(""){}
     
     std::string TokenLocation::toString() const{
         return "line-" + std::to_string(line_) +"  " + "column-"+ std::to_string(column_) + ":";
