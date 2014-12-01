@@ -33,7 +33,7 @@ namespace tinyCompiler
         addToken(":=",  std::make_pair(TokenType::OPERATOR, TokenValue::LESS_THEN));
     }
     
-    void Dictionary::addToken(const std::string name, std::pair<TokenType, TokenValue> tokenMeta){
+    void Dictionary::addToken(std::string name, std::pair<TokenType, TokenValue> tokenMeta){
         dictionary_.insert(std::make_pair(name,tokenMeta));
     }
     

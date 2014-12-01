@@ -10,7 +10,7 @@
 #include "error.h"
 
 namespace tinyCompiler {
-    Scanner::Scanner(const std::string &fileName):fileName_(fileName),line_(1),column_(0),currentChar_(0),state_(State::NONE){
+    Scanner::Scanner(const std::string &srcfileName):fileName_(srcfileName),line_(1),column_(0),currentChar_(0),state_(State::NONE){
         input_.open(fileName_);
         
         if(input_.fail()){
@@ -74,10 +74,10 @@ namespace tinyCompiler {
                 
                 //error need to handle, eg:eof
             }while (currentChar_!='}');
-        }
         
-        if(!input_.eof()){
-            getNextChar();
+            if(!input_.eof()){
+                getNextChar();
+            }
         }
     }
     

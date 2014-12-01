@@ -16,13 +16,14 @@
 using namespace tinyCompiler;
 
 int main(){
-    Scanner myScanner("test.txt");
+    Scanner myScanner("/Users/lms/Documents/TinyCompiler/TinyCompiler/TinyCompiler/test.txt");
     
-    myScanner.getNextToken();
     
-    while (myScanner.getToken().getTokenType() != TokenType::END_OF_FILE) {
-        myScanner.getToken().dump();
+    do{
         myScanner.getNextToken();
-    }
+        myScanner.getToken().dump();
+        
+    }while (myScanner.getToken().getTokenType() != TokenType::END_OF_FILE);
+        
     return 0;
 }
