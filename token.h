@@ -47,7 +47,7 @@ namespace tinyCompiler
 
 		// comparation symbols
 		EQUAL,			// =
-        LESS_THEN,      // <
+        LESS_THAN,      // <
 
 		UNRESERVED
 	};
@@ -58,6 +58,7 @@ namespace tinyCompiler
         TokenLocation(const std::string &fileName, long line, long column);
         
         std::string toString() const;
+        
 	private:
 		long        line_;
 		long        column_;
