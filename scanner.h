@@ -16,7 +16,8 @@
 namespace tinyCompiler {
     class Scanner{
     public:
-        explicit Scanner(const std::string &fileName);
+        Scanner();
+        Scanner(const std::string &fileName);
         Token   getToken() const;
         Token   getNextToken();
     private:
